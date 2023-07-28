@@ -16,7 +16,7 @@ public class Customer {
 	private Long id;
 	private String name;
 	@ManyToOne
-	@JoinColumn(name = "idconseiller")
+	@JoinColumn(name="conseiller_id")
 	private Conseiller conseiller;
 
 
@@ -46,15 +46,21 @@ public class Customer {
 		this.name = name;
 	}
 
+
+
+	public Conseiller getConseiller() {
+		return conseiller;
+	}
+
+
+
+	public void setConseiller(Conseiller conseiller) {
+		this.conseiller = conseiller;
+	}
+
 	
 
-//	public Conseiller getConseiller() {
-//		return Conseiller;
-//	}
-//
-//	public void setConseiller(Conseiller conseiller) {
-//		Conseiller = conseiller;
-//	}
+	
 //
 //	@Override
 //	public String toString() {
