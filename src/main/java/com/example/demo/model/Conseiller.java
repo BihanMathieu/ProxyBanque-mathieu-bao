@@ -18,8 +18,13 @@ public class Conseiller {
 	@GeneratedValue
 	private Long id;
 	private String name;
+	
 	@OneToMany(mappedBy="conseiller",cascade = {CascadeType.PERSIST})
 	private Set<Customer> customers = new HashSet<Customer>();
+	
+	@ManyToOne
+	@JoinColumn(name="agence_id")
+	private Agence agence;
 	
 	public Conseiller() {
 	}
@@ -58,6 +63,17 @@ public class Conseiller {
 
 	public void setCustomers(Set<Customer> customers) {
 		this.customers = customers;
+	}
+
+	
+	
+	public Agence getAgence() {
+		return agence;
+	}
+
+
+	public void setAgence(Agence agence) {
+		this.agence = agence;
 	}
 
 
