@@ -6,6 +6,7 @@ import com.example.demo.model.Compte;
 
 public interface CompteService {
 
+	Compte createCompte(String type, int solde);
 	Iterable<Compte> getAllCompte();
 	Compte saveCompte(Compte compte,Long id);
 	Optional<Compte> getCompteById(Long id);

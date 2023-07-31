@@ -1,16 +1,25 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class CompteEpargne extends Compte {
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	@OneToOne(mappedBy = "compteEpargne")
+    
+	@OneToOne(mappedBy = "compte")
 	private Customer customer;
+	public CompteEpargne() {
+		super();
+	}
+
+	public CompteEpargne(String type, String numCompte, int solde, LocalDate creationDate) {
+        super(type, numCompte, solde, creationDate);
+    }
+
+	
+	
+	
 }

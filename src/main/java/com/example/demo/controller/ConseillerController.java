@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Conseiller;
-import com.example.demo.model.Customer;
 import com.example.demo.service.ConseillerService;
-import com.example.demo.service.CustomerService;
 
 @RestController
 @RequestMapping("/conseillers")

@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,9 +22,15 @@ public class Customer {
 	@ManyToOne
 	@JoinColumn(name = "conseiller_id")
 	private Conseiller conseiller;
-	@OneToOne
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "compte_courant_id", referencedColumnName = "id")
 	private CompteCourant compteCourant;
-	@OneToOne
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "compte_epargne_id", referencedColumnName = "id")
 	private CompteEpargne compteEpargne;
 
 	public Customer() {
@@ -55,6 +62,23 @@ public class Customer {
 
 	public void setConseiller(Conseiller conseiller) {
 		this.conseiller = conseiller;
+	}
+
+	
+	public CompteCourant getCompteCourant() {
+		return compteCourant;
+	}
+
+	public void setCompteCourant(CompteCourant compteCourant) {
+		this.compteCourant = compteCourant;
+	}
+
+	public CompteEpargne getCompteEpargne() {
+		return compteEpargne;
+	}
+
+	public void setCompteEpargne(CompteEpargne compteEpargne) {
+		this.compteEpargne = compteEpargne;
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class AgenceController {
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Agence> getCoffeeById(@PathVariable Long id) {
+	Optional<Agence> getAgenceById(@PathVariable Long id) {
 		return agenceService.getAgenceById(id);
 	}
 	
