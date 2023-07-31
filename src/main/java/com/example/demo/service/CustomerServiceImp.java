@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Repository.ConseillerRepository;
 import com.example.demo.Repository.CustomerRepository;
+import com.example.demo.model.Conseiller;
 import com.example.demo.model.Customer;
 
 import ch.qos.logback.core.net.server.Client;
@@ -13,9 +15,11 @@ import ch.qos.logback.core.net.server.Client;
 public class CustomerServiceImp implements CustomerService {
 
 	private CustomerRepository customerRepository;
+	private ConseillerRepository conseillerRepository;
 
-	public CustomerServiceImp(CustomerRepository customerRepository) {
+	public CustomerServiceImp(CustomerRepository customerRepository,ConseillerRepository conseillerRepository) {
 		this.customerRepository = customerRepository;
+		this.conseillerRepository = conseillerRepository;
 	}
 
 	@Override
@@ -25,8 +29,12 @@ public class CustomerServiceImp implements CustomerService {
 	}
 
 	@Override
-	public Customer saveCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+	public Customer saveCustomer(Customer customer, Long id) {
+		Optional<Conseiller> conseillerOptional = conseillerRepository.findById(id);
+		if(conseillerOptional.isPresent()) {
+			Conseiller conseiller = conseillerOptional.get();
+			customer.setConseiller(conseiller);
+		}
 		return customerRepository.save(customer);
 	}
 
@@ -38,7 +46,7 @@ public class CustomerServiceImp implements CustomerService {
 
 	@Override
 	public void deleteCustomerById(Long id) {
-		// TODO Auto-generated method stub
+		customerRepository.deleteById(id);
 
 	}
 

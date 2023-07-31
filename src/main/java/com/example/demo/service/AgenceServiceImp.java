@@ -35,19 +35,18 @@ public class AgenceServiceImp implements AgenceService{
 
 	@Override
 	public Agence saveAgence(Agence agence) {
-		// TODO Auto-generated method stub
-		return agenceRepository.save(agence);
+		Agence newAgence = createAgence(agence.getName());
+		return agenceRepository.save(newAgence);
 	}
 
 	@Override
 	public Optional<Agence> getAgenceById(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return agenceRepository.findById(id);
 	}
 
 	@Override
 	public void deleteAgenceById(Long id) {
-		// TODO Auto-generated method stub
+		agenceRepository.deleteById(id);
 		
 	}
 

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.example.demo.service.RandomCodeGeneratorService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -15,25 +15,22 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Agence {
 
-
-	
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
 	private String codeAlpha;
 	private LocalDate creationDate;
-	
-	@OneToMany(mappedBy="agence",cascade = {CascadeType.PERSIST})
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "agence", cascade = { CascadeType.PERSIST })
 	private Set<Conseiller> Conseillers = new HashSet<Conseiller>();
 
-	
-	
 	public Agence() {
 	}
 
-	public Agence(String name,String codeAlpha,LocalDate creationDate) {
-		this.name = name; 
+	public Agence(String name, String codeAlpha, LocalDate creationDate) {
+		this.name = name;
 		this.codeAlpha = codeAlpha;
 		this.creationDate = creationDate;
 	}
@@ -46,8 +43,6 @@ public class Agence {
 		this.id = id;
 	}
 
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -80,8 +75,10 @@ public class Agence {
 		Conseillers = conseillers;
 	}
 
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Agence [id=" + id + ", name=" + name + ", codeAlpha=" + codeAlpha + ", creationDate=" + creationDate
+				+ "]";
+	}
+
 }

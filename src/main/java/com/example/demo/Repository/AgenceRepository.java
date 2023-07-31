@@ -1,9 +1,9 @@
 package com.example.demo.Repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.Agence;
 
-public interface AgenceRepository extends CrudRepository<Agence, Long> {
+public interface AgenceRepository extends JpaRepository<Agence, Long> {
 
 }

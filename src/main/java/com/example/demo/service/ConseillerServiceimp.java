@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Repository.AgenceRepository;
 import com.example.demo.Repository.ConseillerRepository;
+import com.example.demo.model.Agence;
 import com.example.demo.model.Conseiller;
 
 @Service
@@ -12,9 +14,11 @@ public class ConseillerServiceimp implements ConseillerService {
 
 	
 	private ConseillerRepository conseillerRepository;
+	private AgenceRepository agenceRepository;
 
-	public ConseillerServiceimp(ConseillerRepository conseillerRepository) {
+	public ConseillerServiceimp(ConseillerRepository conseillerRepository,AgenceRepository agenceRepository) {
 		this.conseillerRepository = conseillerRepository;
+		this.agenceRepository =agenceRepository;
 	}
 	
 	@Override
@@ -24,9 +28,14 @@ public class ConseillerServiceimp implements ConseillerService {
 	}
 
 	@Override
-	public Conseiller saveConseiller(Conseiller conseiller) {
-		// TODO Auto-generated method stub
-		return conseillerRepository.save(conseiller);
+	public Conseiller saveConseiller(Conseiller conseiller, Long id) {
+		Optional<Agence> agenceOptionnal = agenceRepository.findById(id);
+		if (agenceOptionnal.isPresent()) {
+			Agence agence = agenceOptionnal.get();
+			conseiller.setAgence(agence);
+		}
+
+	    return conseillerRepository.save(conseiller);
 	}
 
 	@Override
@@ -37,7 +46,7 @@ public class ConseillerServiceimp implements ConseillerService {
 
 	@Override
 	public void deleteConseillerById(Long id) {
-		// TODO Auto-generated method stub
+		conseillerRepository.deleteById(id);
 		
 	}
 

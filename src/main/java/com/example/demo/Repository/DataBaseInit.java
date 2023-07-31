@@ -28,26 +28,26 @@ public class DataBaseInit {
 		this.agenceService = agenceService;
 	}
 
-	@PostConstruct
-	private void loadData() {
-		Conseiller conseiller = new Conseiller("Jean Dupont");
-		Agence agence = agenceService.createAgence("Marie Dupond") ;
-
-		// Créer deux clients et les associer au conseiller
-		Customer client1 = new Customer("Client 1");
-		Customer client2 = new Customer("Client 2");
-
-		client1.setConseiller(conseiller);
-		client2.setConseiller(conseiller);
-
-		conseiller.getCustomers().add(client1);
-		conseiller.getCustomers().add(client2);
-
-		conseiller.setAgence(agence);
-		agence.getConseillers().add(conseiller);
-
-		// Sauvegarder le conseiller et ses clients
-		agenceRepository.save(agence);
-
-	}
+//	@PostConstruct
+//	private void loadData() {
+//		Conseiller conseiller = new Conseiller("Jean Dupont");
+//		Agence agence = agenceService.createAgence("Marie Dupond") ;
+//
+//		// Créer deux clients et les associer au conseiller
+//		Customer client1 = new Customer("Client 1");
+//		Customer client2 = new Customer("Client 2");
+//
+//		client1.setConseiller(conseiller);
+//		client2.setConseiller(conseiller);
+//
+//		conseiller.getCustomers().add(client1);
+//		conseiller.getCustomers().add(client2);
+//
+//		conseiller.setAgence(agence);
+//		agence.getConseillers().add(conseiller);
+//
+//		// Sauvegarder le conseiller et ses clients
+//		agenceRepository.save(agence);
+//
+//	}
 }

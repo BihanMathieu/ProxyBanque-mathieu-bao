@@ -12,7 +12,7 @@ import ch.qos.logback.core.net.server.Client;
 public interface CustomerService {
 
 	Iterable<Customer> getAllCustomers();
-	Customer saveCustomer(Customer customer);
+	Customer saveCustomer(Customer customer, Long id);
 	Optional<Client> getCustomerById(Long id);
 	void deleteCustomerById(Long id);
 	Customer updateCustomer(Customer customer);
