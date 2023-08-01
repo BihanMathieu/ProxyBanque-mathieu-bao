@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Repository.CompteRepository;
 import com.example.demo.Repository.CustomerRepository;
+import com.example.demo.dto.VirementDTO;
 import com.example.demo.model.Compte;
 import com.example.demo.model.CompteCourant;
 import com.example.demo.model.CompteEpargne;
@@ -36,8 +37,6 @@ public class CompteServiceImp implements CompteService {
         } else if ("ce".equalsIgnoreCase(type)) {
             compte = new CompteEpargne(type, numCompte, solde, creationDate);
         } else {
-            // Handle the case when an invalid type is provided (Optional: throw an exception or return null)
-            // For example:
             throw new IllegalArgumentException("Invalid type: " + type);
         }
 
@@ -46,7 +45,7 @@ public class CompteServiceImp implements CompteService {
 	
 	@Override
 	public Iterable<Compte> getAllCompte() {
-		return null;
+		return compteRepository.findAll();
 	}
 
 	@Override
@@ -82,4 +81,21 @@ public class CompteServiceImp implements CompteService {
 		return null;
 	}
 
+	public void virementCompte(VirementDTO virementDTO) {
+		Optional<Compte> optionalCompteSource = compteRepository.findById(virementDTO.idSource());
+		Optional<Compte> optionalCompteDestinataire = compteRepository.findById(virementDTO.idDestination());
+		if(optionalCompteSource.isPresent() && optionalCompteDestinataire.isPresent()) {
+			Compte compteSource = optionalCompteSource.get();
+			Compte compteDestinataire = optionalCompteDestinataire.get();
+			if (compteSource.getSolde() >= virementDTO.montant() && virementDTO.montant() > 0) {
+				compteSource.setSolde(compteSource.getSolde() - virementDTO.montant());
+				compteDestinataire.setSolde(compteDestinataire.getSolde()+ virementDTO.montant());  
+				
+				compteRepository.save(compteSource);
+				compteRepository.save(compteDestinataire);
+	        } 
+		};
+		
+		
+	}
 }

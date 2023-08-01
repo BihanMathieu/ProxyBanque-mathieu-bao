@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Customer {
@@ -16,6 +17,7 @@ public class Customer {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@NotEmpty(message = "Customer name field can't be empty")
 	private String name;
 
 	@JsonIgnore

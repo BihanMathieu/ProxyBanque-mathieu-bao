@@ -13,32 +13,34 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Agence;
 import com.example.demo.service.AgenceService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/agences")
 public class AgenceController {
 
 	private AgenceService agenceService;
-	
+
 	public AgenceController(AgenceService agenceService) {
-		this.agenceService=agenceService;
+		this.agenceService = agenceService;
 	}
-	
+
 	@GetMapping
 	Iterable<Agence> getAgences() {
 
 		return agenceService.getAllAgences();
 	}
-	
+
 	@PostMapping
-	Agence postAgence(@RequestBody Agence a) {
+	Agence postAgence(@Valid @RequestBody Agence a) {
 		return agenceService.saveAgence(a);
 	}
-	
+
 	@GetMapping("/{id}")
 	Optional<Agence> getAgenceById(@PathVariable Long id) {
 		return agenceService.getAgenceById(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	void deleteCoffee(@PathVariable Long id) {
 		agenceService.deleteAgenceById(id);

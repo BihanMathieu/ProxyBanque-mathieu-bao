@@ -11,28 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Conseiller;
 import com.example.demo.service.ConseillerService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/conseillers")
 public class ConseillerController {
 
 	private final ConseillerService conseillerService;
-	
+
 	public ConseillerController(ConseillerService conseillerService) {
 		// TODO Auto-generated constructor stub
-		this.conseillerService=conseillerService;
+		this.conseillerService = conseillerService;
 	}
-	
+
 	@GetMapping
 	Iterable<Conseiller> getCustomers() {
 
 		return conseillerService.getAllConseiller();
 	}
-	
+
 	@PostMapping("/{id}")
-	Conseiller postCustomer(@RequestBody Conseiller c,@PathVariable Long id) {
-		return conseillerService.saveConseiller(c,id);
+	Conseiller postCustomer(@Valid @RequestBody Conseiller c, @PathVariable Long id) {
+		return conseillerService.saveConseiller(c, id);
 	}
-	
+
 	@DeleteMapping
 	void deleteCoffee(@PathVariable Long id) {
 		conseillerService.deleteConseillerById(id);

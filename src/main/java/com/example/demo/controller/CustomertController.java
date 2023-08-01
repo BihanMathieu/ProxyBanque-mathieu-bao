@@ -15,18 +15,18 @@ import com.example.demo.model.Customer;
 import com.example.demo.service.ConseillerService;
 import com.example.demo.service.CustomerService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/customers")
 public class CustomertController {
 
 	private final CustomerService customerService;
-	private final ConseillerService conseillerService;
 	
 	public CustomertController(CustomerService customerService,ConseillerService conseillerService) {
 		// TODO Auto-generated constructor stub
 		this.customerService=customerService;
-		this.conseillerService=conseillerService;
 	}
 	
 	@GetMapping
@@ -36,11 +36,11 @@ public class CustomertController {
 	}
 	
 	@PostMapping("/{id}")
-	Customer postCustomer(@RequestBody Customer c, @PathVariable Long id) {
+	Customer postCustomer(@Valid @RequestBody Customer c, @PathVariable Long id) {
 
 		return customerService.saveCustomer(c,id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	void deleteCoffee(@PathVariable Long id) {
 		customerService.deleteCustomerById(id);

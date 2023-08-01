@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Conseiller {
@@ -19,6 +20,8 @@ public class Conseiller {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@NotEmpty(message = "Customer name field can't be empty")
 	private String name;
 
 	@OneToMany(mappedBy = "conseiller", cascade = { CascadeType.PERSIST })

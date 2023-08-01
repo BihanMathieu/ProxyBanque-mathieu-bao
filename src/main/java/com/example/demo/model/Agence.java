@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -11,6 +13,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
+
 
 @Entity
 public class Agence {
@@ -18,6 +22,7 @@ public class Agence {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@NotEmpty(message = "Agence name field can't be empty")
 	private String name;
 	private String codeAlpha;
 	private LocalDate creationDate;
